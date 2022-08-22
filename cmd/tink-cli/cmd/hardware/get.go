@@ -57,11 +57,19 @@ func (h *getHardware) PopulateTable(data []interface{}, t table.Writer) error {
 				t.AppendRow(table.Row{
 					hw.Id,
 					iface.Dhcp.Mac,
-					iface.Dhcp.Ip.Address,
+					getIpAddressValForAppendRow(iface.Dhcp.Ip),
 					iface.Dhcp.Hostname,
 				})
 			}
 		}
 	}
 	return nil
+}
+
+func getIpAddressValForAppendRow(ip *hwpb.Hardware_DHCP_IP) string {
+	var ipAddress string
+	if ip != nil {
+		ipAddress = ip.Address
+	}
+	return ipAddress
 }
