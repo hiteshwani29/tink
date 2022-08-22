@@ -52,7 +52,7 @@ func listHardware() {
 			if quiet {
 				fmt.Println(hw.Id)
 			} else {
-				t.AppendRow(table.Row{hw.Id, iface.Dhcp.Mac, iface.Dhcp.Ip.Address, iface.Dhcp.Hostname})
+				t.AppendRow(table.Row{hw.Id, iface.Dhcp.Mac, getIpAddressValForAppendRow(iface.Dhcp.Ip), iface.Dhcp.Hostname})
 			}
 		}
 	}
